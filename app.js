@@ -18,35 +18,8 @@ async function db_connection(){
 db_connection();
 
 
-app.post('/api/Inventory', async (req,res) => {
-try {
-    const product= await Product.create(req.body)
-    res.status(200).json({
-        success: true,
-        data: product,
-        msg:"product added to database"
-    })
-} catch (error) {
-    res.status(400).json({
-        success: false,
-    msg: error})
-}    
-})
-
-app.get('/api/Inventory',async(req,res)=>{
-    try {
-        const product= await Product.find({category:"Electronics"})
-          res.status(200).json({
-        success: true,
-        data: product,
-        msg:"product found"
-    })
-    } catch (error) {
-         res.status(400).json({
-        success: false,
-    msg: error})
-    }
-})
+const productRoute=require("./route/productRoute")
+app.use(productRoute)
 
 
 
